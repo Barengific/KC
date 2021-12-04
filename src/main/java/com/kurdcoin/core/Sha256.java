@@ -7,17 +7,17 @@ public class Sha256 {
     // take msg
     // breakdown msg for each char in int
     // convert for each char to 8 bit binary
-    static int[] rt2 = {2,3,5,7,11,13,17,19};
-    static int[] rt3 = {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,
-            101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,
-            193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,
-            293,307,311};
+    static int[] rt2 = {2, 3, 5, 7, 11, 13, 17, 19};
+    static int[] rt3 = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+            101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191,
+            193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283,
+            293, 307, 311};
 
-    public static ArrayList<String> rt2s(){
+    public static ArrayList<String> rt2s() {
         //2^1/2 - 2^1/2 * 2^32
         ArrayList<String> rt = new ArrayList<>();
-        for (int i = 0; i < rt2.length; i++){
-            rt.add(addZeros(String.format(Long.toBinaryString((long)((Math.sqrt(rt2[i]) - (int)Math.sqrt(rt2[i]))*Math.pow(2, 32)))),32));
+        for (int i = 0; i < rt2.length; i++) {
+            rt.add(addZeros(String.format(Long.toBinaryString((long) ((Math.sqrt(rt2[i]) - (int) Math.sqrt(rt2[i])) * Math.pow(2, 32)))), 32));
         }
         //System.out.println("rt2: " + rt.toString());
         return rt;
@@ -41,14 +41,14 @@ public class Sha256 {
 //    rt2: [01101010000010011110011001100111, 10111011011001111010111010000101, 00111100011011101111001101110010, 10100101010011111111010100111010, 01010001000011100101001001111111, 10011011000001010110100010001100, 00011111100000111101100110101011, 01011011111000001100110100011001]
 
 
-    public static ArrayList<String> rt3s(){
+    public static ArrayList<String> rt3s() {
         //2^1/3 - 2^1/3 * 2^32
         ArrayList<String> rt = new ArrayList<>();
-        for (int i = 0; i < rt3.length; i++){
-            rt.add(addZeros(String.format(Long.toBinaryString((long)((Math.cbrt(rt3[i]) - (int)Math.cbrt(rt3[i]))*Math.pow(2, 32)))),32));
-      //    rt.add(addZeros(String.format(Long.toBinaryString((long)((Math.sqrt(rt2[i]) - (int)Math.sqrt(rt2[i]))*Math.pow(2, 32)))),32));
+        for (int i = 0; i < rt3.length; i++) {
+            rt.add(addZeros(String.format(Long.toBinaryString((long) ((Math.cbrt(rt3[i]) - (int) Math.cbrt(rt3[i])) * Math.pow(2, 32)))), 32));
+            //    rt.add(addZeros(String.format(Long.toBinaryString((long)((Math.sqrt(rt2[i]) - (int)Math.sqrt(rt2[i]))*Math.pow(2, 32)))),32));
         }
-       // System.out.println("rt3: " + rt.toString());
+        // System.out.println("rt3: " + rt.toString());
         return rt;
     }
 
@@ -63,76 +63,104 @@ public class Sha256 {
 //            0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
 //            0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
 //            0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-      //01000010100010100010111110011000
+    //01000010100010100010111110011000
     //['01000010100010100010111110011000', '01110001001101110100010010010001', '10110101110000001111101111001111', '11101001101101011101101110100101', '00111001010101101100001001011011', '01011001111100010001000111110001', '10010010001111111000001010100100', '10101011000111000101111011010101', '11011000000001111010101010011000', '00010010100000110101101100000001', '00100100001100011000010110111110', '01010101000011000111110111000011', '01110010101111100101110101110100', '10000000110111101011000111111110', '10011011110111000000011010100111', '11000001100110111111000101110100', '11100100100110110110100111000001', '11101111101111100100011110000110', '00001111110000011001110111000110', '00100100000011001010000111001100', '00101101111010010010110001101111', '01001010011101001000010010101010', '01011100101100001010100111011100', '01110110111110011000100011011010', '10011000001111100101000101010010', '10101000001100011100011001101101', '10110000000000110010011111001000', '10111111010110010111111111000111', '11000110111000000000101111110011', '11010101101001111001000101000111', '00000110110010100110001101010001', '00010100001010010010100101100111', '00100111101101110000101010000101', '00101110000110110010000100111000', '01001101001011000110110111111100', '01010011001110000000110100010011', '01100101000010100111001101010100', '01110110011010100000101010111011', '10000001110000101100100100101110', '10010010011100100010110010000101', '10100010101111111110100010100001', '10101000000110100110011001001011', '11000010010010111000101101110000', '11000111011011000101000110100011', '11010001100100101110100000011001', '11010110100110010000011000100100', '11110100000011100011010110000101', '00010000011010101010000001110000', '00011001101001001100000100010110', '00011110001101110110110000001000', '00100111010010000111011101001100', '00110100101100001011110010110101', '00111001000111000000110010110011', '01001110110110001010101001001010', '01011011100111001100101001001111', '01101000001011100110111111110011', '01110100100011111000001011101110', '01111000101001010110001101101111', '10000100110010000111100000010100', '10001100110001110000001000001000', '10010000101111101111111111111010', '10100100010100000110110011101011', '10111110111110011010001111110111', '11000110011100010111100011110010']
- // 3: [01000010100010100010111110011000,   01110001001101110100010010010001,   10110101110000001111101111001111,   11101001101101011101101110100101,   00111001010101101100001001011011,   01011001111100010001000111110001, 10010010001111111000001010100100, 10101011000111000101111011010101, 11011000000001111010101010011000, 00010010100000110101101100000001, 00100100001100011000010110111110, 01010101000011000111110111000011, 01110010101111100101110101110100, 10000000110111101011000111111110, 10011011110111000000011010100111, 11000001100110111111000101110100, 11100100100110110110100111000001, 11101111101111100100011110000110, 00001111110000011001110111000110, 00100100000011001010000111001100, 00101101111010010010110001101111, 01001010011101001000010010101010, 01011100101100001010100111011100, 01110110111110011000100011011010, 10011000001111100101000101010010, 10101000001100011100011001101101, 10110000000000110010011111001000, 10111111010110010111111111000111, 11000110111000000000101111110011, 11010101101001111001000101000111, 00000110110010100110001101010001, 00010100001010010010100101100111, 00100111101101110000101010000101, 00101110000110110010000100111000, 01001101001011000110110111111100, 01010011001110000000110100010011, 01100101000010100111001101010100, 01110110011010100000101010111011, 10000001110000101100100100101110, 10010010011100100010110010000101, 10100010101111111110100010100001, 10101000000110100110011001001011, 11000010010010111000101101110000, 11000111011011000101000110100011, 11010001100100101110100000011001, 11010110100110010000011000100100, 11110100000011100011010110000101, 00010000011010101010000001110000, 00011001101001001100000100010110, 00011110001101110110110000001000, 00100111010010000111011101001100, 00110100101100001011110010110101, 00111001000111000000110010110011, 01001110110110001010101001001010, 01011011100111001100101001001111, 01101000001011100110111111110011, 01110100100011111000001011101110, 01111000101001010110001101101111, 10000100110010000111100000010100, 10001100110001110000001000001000, 10010000101111101111111111111010, 10100100010100000110110011101011, 10111110111110011010001111110111, 11000110011100010111100011110010]
+    // 3: [01000010100010100010111110011000,   01110001001101110100010010010001,   10110101110000001111101111001111,   11101001101101011101101110100101,   00111001010101101100001001011011,   01011001111100010001000111110001, 10010010001111111000001010100100, 10101011000111000101111011010101, 11011000000001111010101010011000, 00010010100000110101101100000001, 00100100001100011000010110111110, 01010101000011000111110111000011, 01110010101111100101110101110100, 10000000110111101011000111111110, 10011011110111000000011010100111, 11000001100110111111000101110100, 11100100100110110110100111000001, 11101111101111100100011110000110, 00001111110000011001110111000110, 00100100000011001010000111001100, 00101101111010010010110001101111, 01001010011101001000010010101010, 01011100101100001010100111011100, 01110110111110011000100011011010, 10011000001111100101000101010010, 10101000001100011100011001101101, 10110000000000110010011111001000, 10111111010110010111111111000111, 11000110111000000000101111110011, 11010101101001111001000101000111, 00000110110010100110001101010001, 00010100001010010010100101100111, 00100111101101110000101010000101, 00101110000110110010000100111000, 01001101001011000110110111111100, 01010011001110000000110100010011, 01100101000010100111001101010100, 01110110011010100000101010111011, 10000001110000101100100100101110, 10010010011100100010110010000101, 10100010101111111110100010100001, 10101000000110100110011001001011, 11000010010010111000101101110000, 11000111011011000101000110100011, 11010001100100101110100000011001, 11010110100110010000011000100100, 11110100000011100011010110000101, 00010000011010101010000001110000, 00011001101001001100000100010110, 00011110001101110110110000001000, 00100111010010000111011101001100, 00110100101100001011110010110101, 00111001000111000000110010110011, 01001110110110001010101001001010, 01011011100111001100101001001111, 01101000001011100110111111110011, 01110100100011111000001011101110, 01111000101001010110001101101111, 10000100110010000111100000010100, 10001100110001110000001000001000, 10010000101111101111111111111010, 10100100010100000110110011101011, 10111110111110011010001111110111, 11000110011100010111100011110010]
 
     public static void main(String[] args) {
-        hashes("");
-        hashes("123");
+        //hashes("");
+        //hashes("123");
         hashes("abc");
+
+//        String qq = "";
+//        String a = "00001111";
+//        String b = "00110011";
+//        String c = "01010101";
+//
+//        for (int i = 0; i < a.length(); i++) {
+//            System.out.println("true val: " + (a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)));
+//
+//            if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 49) {
+//                qq += "1";
+//                System.out.println("sig1_xor = 1");
+//            } else if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 48) {
+//                qq += "0";
+//                System.out.println("sig1_xor = 0");
+//            } else {
+//                System.out.println("nothinggg");
+//                System.out.println();
+//            }
+//        }
+//        System.out.println(qq);
 
     }
 
-    public static void hashes(String msg){
+    public static void hashes(String msg) {
         ArrayList<String> rt22 = rt2s();
         ArrayList<String> rt33 = rt3s();
 
         String message = "";
-        for (int i = 0; i < msg.length(); i++){
+        for (int i = 0; i < msg.length(); i++) {
             message += String.format("%08d", Integer.parseInt(Integer.toBinaryString((int) msg.charAt(i)))); //msg to binary
         }
+        //System.out.println("line85: " + message);
+
         String msgLen = String.format("%064d", Integer.parseInt(Integer.toBinaryString((int) message.length()))); //msg length in binary
-        int chunkno = chunkNo(msg); //chuncks required
+        int chunkno = chunkNo(msg); //chuncks required //padding number
+        //System.out.println("line88: " + chunkno);
 
         message += "1";
-        int padding = chunkno*512-(message.length()+64);
+        int padding = chunkno * 512 - (message.length() + 64);
+        //System.out.println(padding);
 
-        for (int i = 0; i < padding; i++){
+        for (int i = 0; i < padding; i++) {
             message += "0";
-        }
+        }//padding applied
+        //System.out.println(message);
+        //System.out.println(message.length());
+
         message += msgLen;
+        //System.out.println(message);
+        //System.out.println(message.length());
 
         int min = 0;
         int max = 512;
         ArrayList<String> chunks = new ArrayList<>();
-        for (int i = 0; i < chunkno; i++){
-            chunks.add(message.substring(min,max)); //split into chunks of 512bit
+        for (int i = 0; i < chunkno; i++) {
+            chunks.add(message.substring(min, max)); //split into chunks of 512bit
             min += 512;
             max += 512;
         }
 
+
         //process the message in successive 512bit chunks:
-        for (int i = 0; i < chunkno; i++){
+        for (int i = 0; i < chunkno; i++) {
             String newMsg = chunks.get(i);
             min = 0;
             max = 32;
 
             ArrayList<String> msgChunks = new ArrayList<>();
-            for (int j = 0; j < 16; j++){
-                msgChunks.add(newMsg.substring(min,max));
-                min = 0;
-                max = 32;
+            for (int j = 0; j < 16; j++) {
+                msgChunks.add(newMsg.substring(min, max));
+                min += 32;
+                max += 32;
             }
+            //System.out.println(msgChunks);
+            //System.out.println(msgChunks.size());
 
-            //
-            //
-            //
-            for (int j = 0; j < 16; j++){
-
-            }
-            //
-            //
-            //
-
-            for (int j = 16; j < 64; j++){
+            for (int j = 16; j < 64; j++) {//for (int j = 16; j < 64; j++){
                 //int mlen = msgChunks.size();
-                String s0 = sig0(msgChunks.get(msgChunks.size()-15));
-                String s1 = sig1(msgChunks.get(msgChunks.size()-2));
-                String addup = adder(msgChunks.get(msgChunks.size()-16), s0, msgChunks.get(msgChunks.size()-7), s1);
+                String s0 = sig0(msgChunks.get(msgChunks.size() - 15));
+                //System.out.println("s0: " + s0);
+                String s1 = sig1(msgChunks.get(msgChunks.size() - 2));
+                //System.out.println("s1: " + s1);
+                String addup = adder(msgChunks.get(msgChunks.size() - 16), s0, msgChunks.get(msgChunks.size() - 7), s1);
+                //System.out.println("addup: " + addup);
                 msgChunks.add(addup);
-
             }
+            System.out.println(msgChunks);
+            System.out.println(msgChunks.size());
+
             String a = rt22.get(0);
             String b = rt22.get(1);
             String c = rt22.get(2);
@@ -142,15 +170,15 @@ public class Sha256 {
             String g = rt22.get(6);
             String h = rt22.get(7);
 
-            for (int j = 0; j < 64; j++){
+            for (int j = 0; j < 64; j++) {
                 String S1 = sigma1(e);
-                String ch = cho(e,f,g);
+                String ch = cho(e, f, g);
                 String temp1 = adders(Long.parseLong(h, 2) + Long.parseLong(S1, 2) +
                         Long.parseLong(ch, 2) + Long.parseLong(rt33.get(j), 2) +
                         Long.parseLong(msgChunks.get(j), 2));
 
                 String S0 = sigma0(a);
-                String maj = mj(a,b,c);
+                String maj = mj(a, b, c);
                 String temp2 = adders(Long.parseLong(S0, 2) + Long.parseLong(maj, 2));
 
                 h = g;
@@ -172,52 +200,38 @@ public class Sha256 {
             rt22.set(6, adders(Long.parseLong(rt22.get(6), 2) + Long.parseLong(g, 2)));
             rt22.set(7, adders(Long.parseLong(rt22.get(7), 2) + Long.parseLong(h, 2)));
 
-
+            // System.out.println(rt22.toString());
         }
+
+
         String digest = "";
         String hexStr = "";
-        for (int j = 0; j < 8; j++){
+        for (int j = 0; j < 8; j++) {
             digest += rt22.get(j);
-            long decimal = Long.parseLong(rt22.get(j),2);
-            hexStr += Long.toString(decimal,16);
+            long decimal = Long.parseLong(rt22.get(j), 2);
+            hexStr += Long.toString(decimal, 16);
         }
         //long decimal = Long.parseLong(digest,2);
-        //String hexStr = Long.toString(decimal,16);
+        // hexStr = Long.toString(decimal,16);
         String hexString = new BigInteger(digest, 2).toString(16);
 
         System.out.println(hexStr);
         System.out.println(digest);
         System.out.println(hexString);
 
-
-
-
-
-        // digestRes = hex(int(digest, 2))
-//        digestOb = digestRes[2:]
-//
-//        if len(digestOb) < 64:
-//        digestOb = "0" + digestOb
-//
-//    # print(digest)
-//    # print(len(digest))
-//    # print(hex(int(digest, 2)))
-//    #return hex(int(digest, 2))
-//        return digestOb
-
     }
 
-    public static int chunkNo(String msg){
+    public static int chunkNo(String msg) {
         int chunks = 1;
         int bsize = 447;
 
-        if(msg.length() <= bsize){
+        if (msg.length() <= bsize) {
             chunks = 1;
-        }else if(msg.length() >= bsize+1){
-            while(true){
+        } else if (msg.length() >= bsize + 1) {
+            while (true) {
                 bsize += 512;
                 chunks += 1;
-                if(msg.length() <= bsize){
+                if (msg.length() <= bsize) {
                     break;
                 }
             }
@@ -225,144 +239,200 @@ public class Sha256 {
         return chunks;
     }
 
-    public static String sig0(String bits){
-        String a = rotr(bits,7);
-        String b = rotr(bits,18);
-        String c = shr(bits,3);
-
-        String res = xor(a,b,c);
+    public static String sig0(String bits) {
+        String a = rotr(bits, 7);
+        String b = rotr(bits, 18);
+        String c = shr(bits, 3);
+        String res = xor(a, b, c);
+//        System.out.println("sig0a: " + a);
+//        System.out.println("sig0b: " + b);
+//        System.out.println("sig0c: " + c);
+        //System.out.println("Isig0: " + res);
         return res;
     }
 
-    public static String sig1(String bits){
-        String a = rotr(bits,17);
-        String b = rotr(bits,19);
-        String c = shr(bits,10);
-
-        String res = xor(a,b,c);
+    public static String sig1(String bits) {
+        String a = rotr(bits, 17);
+        String b = rotr(bits, 19);
+        String c = shr(bits, 10);
+        String res = xor(a, b, c);
+//        System.out.println("a: " + a);
+//        System.out.println("b: " + b);
+//        System.out.println("c: " + c);
+//        System.out.println("sig1: " + res);
         return res;
     }
 
-    public static String sigma0(String bits){
-        String a = rotr(bits,2);
-        String b = rotr(bits,13);
-        String c = rotr(bits,22);
-
-        String res = xor(a,b,c);
+    public static String sigma0(String bits) {
+        String a = rotr(bits, 2);
+        String b = rotr(bits, 13);
+        String c = rotr(bits, 22);
+        String res = xor(a, b, c);
         return res;
     }
 
-    public static String sigma1(String bits){
-        String a = rotr(bits,6);
-        String b = rotr(bits,11);
-        String c = rotr(bits,25);
-
-        String res = xor(a,b,c);
+    public static String sigma1(String bits) {
+        String a = rotr(bits, 6);
+        String b = rotr(bits, 11);
+        String c = rotr(bits, 25);
+        String res = xor(a, b, c);
         return res;
     }
 
-    public static String xor(String a, String b, String c){
+    public static String xor(String a, String b, String c) {
         String res = "";
-        for(int i = 0; i < a.length(); i++){
-            if(a.substring(i).equals("1") && b.substring(i).equals("1")){
+        //System.out.println("a length: " + a.length());
+//        System.out.println("xor0a: " + a);
+//        System.out.println("xor0b: " + b);
+//        System.out.println("xor0c: " + c);
+        for (int i = 0; i < a.length(); i++) {
+            //System.out.println("xor i =" + i);
+//            if(a.substring(i).equals("1") && b.substring(i).equals("1")){
+//                res += "1";
+//            }else if(b.substring(i).equals("1") && c.substring(i).equals("1")){
+//                res += "1";
+//            }else if(a.substring(i).equals("1") && c.substring(i).equals("1")){
+//                res += "1";
+//            }else if(a.substring(i).equals("0") && b.substring(i).equals("0") && c.substring(i).equals("0")){
+//                res += "1";
+//            }else{
+//                res += "0";
+//            }
+            //
+            //
+//            if(a.substring(i).equals("1") ^ b.substring(i).equals("1") ^ c.substring(i).equals("1")){
+//                res += "1";
+//            }else if (a.substring(i).equals("0") ^ b.substring(i).equals("0") ^ c.substring(i).equals("0")){
+//                res += "0";
+//            }
+            if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 49) {
                 res += "1";
-            }else if(b.substring(i).equals("1") && c.substring(i).equals("1")){
-                res += "1";
-            }else if(a.substring(i).equals("1") && c.substring(i).equals("1")){
-                res += "1";
-            }else{
+                //System.out.println("sig1_xor = 1");
+            } else if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 48) {
                 res += "0";
+                //System.out.println("sig1_xor = 0");
+            } else {
+                System.out.println("nothinggg");
             }
         }
+        //////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
+        //////////////////////////////////////////////////// fix xor
+
         return res;
     }
 
-    public static String adder(String a, String b, String c, String d){
+    public static String adder(String a, String b, String c, String d) {
         String res = "";
         long aint = Long.parseLong(a, 2);
         long bint = Long.parseLong(b, 2);
         long cint = Long.parseLong(c, 2);
         long dint = Long.parseLong(d, 2);
         long r = aint + bint + cint + dint;
+//        System.out.println("a: " + aint);
+//        System.out.println("b: " + bint);
+//        System.out.println("c: " + cint);
+//        System.out.println("d: " + dint);
+//        System.out.println("r: " + r);
+
 
         String binr = Long.toBinaryString((long) r);
-        if(binr.length() == 32){
+//        System.out.println("hhhh: " + binr);
+        if (binr.length() == 32) {
             res = binr;
-        }else if(binr.length() >= 32){
-            res = Long.toBinaryString((long) (r % Math.pow(2,32)));
+            //System.out.println("qqqqqq");
+        } else if (binr.length() > 32) {
+            res = Long.toBinaryString((long) (r % Math.pow(2, 32)));
+        } else if (binr.length() < 32) {
+            res = addZeros(binr, 32);
+//            System.out.println("eeeeeeee");
+//            System.out.println("ee binr: " + binr);
+//            System.out.println("ee res: " + res);
         }
-
-        if(res.length() < 32){
-            res = addZeros(res,32);
-        }
+        //System.out.println("adderss: "+ res);
         return res;
     }
 
-    public static String adders(long a){
+    public static String adders(long a) {
         String res = "";
         long r = a;
 
         //String binr = String.format("%032d", Long.parseLong(Long.toBinaryString((long) r)));
         String binr = Long.toBinaryString((long) r);
-        if(binr.length() == 32){
+        if (binr.length() == 32) {
             res = binr;
-        }else if(binr.length() >= 32){
-            res = Long.toBinaryString((long) (r % Math.pow(2,32)));
+        } else if (binr.length() >= 32) {
+            res = Long.toBinaryString((long) (r % Math.pow(2, 32)));
         }
 
-        if(res.length() < 32){
-            res = addZeros(res,32);
+        if (res.length() < 32) {
+            res = addZeros(res, 32);
         }
         return res;
     }
 
-    public static String rotr(String a, int rotnumber){
-        for(int i = 0; i < rotnumber; i++){
-            String last_char = a.substring(a.length()-1);
-            a = a.substring(0,a.length()-1);
+    public static String rotr(String a, int rotnumber) {
+        for (int i = 0; i < rotnumber; i++) {
+            String last_char = a.substring(a.length() - 1);
+            a = a.substring(0, a.length() - 1);
             a = last_char + a;
         }
+        //System.out.println("rotr: " + a);
         return a;
     }
 
-    public static String shr(String a, int rotnumber){
-        for(int i = 0; i < rotnumber; i++){
-            a = a.substring(0,a.length()-1);
+    public static String shr(String a, int rotnumber) {
+        for (int i = 0; i < rotnumber; i++) {
+            a = a.substring(0, a.length() - 1);
             a = "0" + a;
         }
         return a;
     }
 
-    public static String cho(String a, String b, String c){
+    public static String cho(String a, String b, String c) {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         String res = "";
-        for(int i = 0; i < a.length(); i++){
-            if(a.substring(i).equals("1")){
+        for (int i = 0; i < a.length(); i++) {
+            if (a.substring(i).equals("1")) {
                 res += b.substring(i);
-            }else if(a.substring(i).equals("0")){
+            } else if (a.substring(i).equals("0")) {
                 res += c.substring(i);
             }
         }
         return res;
     }
 
-    public static String mj(String a, String b, String c){
+    public static String mj(String a, String b, String c) {
 //    #take majority input value
         String res = "";
-        for(int i = 0; i < a.length(); i++){
-            if((a.substring(i).equals("1") && b.substring(i).equals("1")) ^
+        for (int i = 0; i < a.length(); i++) {
+            if ((a.substring(i).equals("1") && b.substring(i).equals("1")) ^
                     (a.substring(i).equals("1") && c.substring(i).equals("1")) ^
-                    (b.substring(i).equals("1") && c.substring(i).equals("1"))){
+                    (b.substring(i).equals("1") && c.substring(i).equals("1"))) {
                 res += "1";
-            }else{
+            } else {
                 res += "0";
             }
+
         }
         return res;
     }
 
-    public static String addZeros(String msg, int newLen){
-        for(int i = msg.length(); i < newLen; i++){
+    public static String addZeros(String msg, int newLen) {
+        for (int i = msg.length(); i < newLen; i++) {
             msg = "0" + msg;
         }
         return msg;

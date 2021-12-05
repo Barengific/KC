@@ -68,40 +68,10 @@ public class Sha256 {
     // 3: [01000010100010100010111110011000,   01110001001101110100010010010001,   10110101110000001111101111001111,   11101001101101011101101110100101,   00111001010101101100001001011011,   01011001111100010001000111110001, 10010010001111111000001010100100, 10101011000111000101111011010101, 11011000000001111010101010011000, 00010010100000110101101100000001, 00100100001100011000010110111110, 01010101000011000111110111000011, 01110010101111100101110101110100, 10000000110111101011000111111110, 10011011110111000000011010100111, 11000001100110111111000101110100, 11100100100110110110100111000001, 11101111101111100100011110000110, 00001111110000011001110111000110, 00100100000011001010000111001100, 00101101111010010010110001101111, 01001010011101001000010010101010, 01011100101100001010100111011100, 01110110111110011000100011011010, 10011000001111100101000101010010, 10101000001100011100011001101101, 10110000000000110010011111001000, 10111111010110010111111111000111, 11000110111000000000101111110011, 11010101101001111001000101000111, 00000110110010100110001101010001, 00010100001010010010100101100111, 00100111101101110000101010000101, 00101110000110110010000100111000, 01001101001011000110110111111100, 01010011001110000000110100010011, 01100101000010100111001101010100, 01110110011010100000101010111011, 10000001110000101100100100101110, 10010010011100100010110010000101, 10100010101111111110100010100001, 10101000000110100110011001001011, 11000010010010111000101101110000, 11000111011011000101000110100011, 11010001100100101110100000011001, 11010110100110010000011000100100, 11110100000011100011010110000101, 00010000011010101010000001110000, 00011001101001001100000100010110, 00011110001101110110110000001000, 00100111010010000111011101001100, 00110100101100001011110010110101, 00111001000111000000110010110011, 01001110110110001010101001001010, 01011011100111001100101001001111, 01101000001011100110111111110011, 01110100100011111000001011101110, 01111000101001010110001101101111, 10000100110010000111100000010100, 10001100110001110000001000001000, 10010000101111101111111111111010, 10100100010100000110110011101011, 10111110111110011010001111110111, 11000110011100010111100011110010]
 
     public static void main(String[] args) {
-        hashes("");
-        hashes("123");
-        hashes("abc");
-
-//        String qq = "";
-//        String a = "00001111";
-//        String b = "00110011";
-//        String c = "01010101";
-//
-//        for (int i = 0; i < a.length(); i++) {
-//            System.out.println("true val: " + (a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)));
-//
-//            if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 49) {
-//                qq += "1";
-//                System.out.println("sig1_xor = 1");
-//            } else if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 48) {
-//                qq += "0";
-//                System.out.println("sig1_xor = 0");
-//            } else {
-//                System.out.println("nothinggg");
-//                System.out.println();
-//            }
-//        }
-//        System.out.println(qq);
-//        String msg = "000111111100011111110001111111";
-//        System.out.println(msg.length());
-//        for (int i = msg.length(); i < 32; i++) {
-//            msg = "0" + msg;
-//        }
-//        System.out.println(msg);
-//        System.out.println(msg.length());
-
-
-    }
+        //hashes("");
+//        hashes("123");
+//        hashes("abc");
+        }
 
     public static void hashes(String msg) {
         ArrayList<String> rt22 = rt2s();
@@ -109,17 +79,24 @@ public class Sha256 {
 
         String message = "";
         for (int i = 0; i < msg.length(); i++) {
-            message += String.format("%08d", Integer.parseInt(Integer.toBinaryString((int) msg.charAt(i)))); //msg to binary
+            //message += String.format("%08d", Integer.parseInt(Integer.toBinaryString((int) msg.charAt(i)))); //msg to binary
+            //message += String.format("%08d", Long.parseLong(Integer.toBinaryString((int) msg.charAt(i)))); //msg to binary
+            message += String.format("%08d", Long.parseLong(Long.toBinaryString((long) msg.charAt(i)))); //msg to binary
         }
-        //System.out.println("line85: " + message);
+        //System.out.println("line86: " + message);
 
-        String msgLen = String.format("%064d", Integer.parseInt(Integer.toBinaryString((int) message.length()))); //msg length in binary
-        int chunkno = chunkNo(msg); //chuncks required //padding number
-        //System.out.println("line88: " + chunkno);
+        String msgLen = String.format("%064d", Long.parseLong(Long.toBinaryString((long) message.length()))); //msg length in binary
+        //System.out.println(msgLen);
+        //String msgLen = String.format("%064d", Integer.parseInt(Integer.toBinaryString((int) message.length()))); //msg length in binary
+//        System.out.println("msg: " + message);
+//        System.out.println("msgL: " + message.length());
+
+        int chunkno = chunkNo(message); //chuncks required //padding number
+//        System.out.println("chunk: " + chunkno);
 
         message += "1";
         int padding = chunkno * 512 - (message.length() + 64);
-        //System.out.println(padding);
+        //System.out.println("padding: " + padding);
 
         for (int i = 0; i < padding; i++) {
             message += "0";
@@ -224,16 +201,16 @@ public class Sha256 {
             }
             //System.out.println(a + b + c + d + e + f + g + h);
 
-            rt22.set(0, adders(Long.parseLong(rt22.get(0), 2) + Long.parseLong(a, 2)));
-            rt22.set(1, adders(Long.parseLong(rt22.get(1), 2) + Long.parseLong(b, 2)));
-            rt22.set(2, adders(Long.parseLong(rt22.get(2), 2) + Long.parseLong(c, 2)));
-            rt22.set(3, adders(Long.parseLong(rt22.get(3), 2) + Long.parseLong(d, 2)));
-            rt22.set(4, adders(Long.parseLong(rt22.get(4), 2) + Long.parseLong(e, 2)));
-            rt22.set(5, adders(Long.parseLong(rt22.get(5), 2) + Long.parseLong(f, 2)));
-            rt22.set(6, adders(Long.parseLong(rt22.get(6), 2) + Long.parseLong(g, 2)));
-            rt22.set(7, adders(Long.parseLong(rt22.get(7), 2) + Long.parseLong(h, 2)));
+            rt22.set(0, addersz(Long.parseLong(rt22.get(0), 2) + Long.parseLong(a, 2)));
+            rt22.set(1, addersz(Long.parseLong(rt22.get(1), 2) + Long.parseLong(b, 2)));
+            rt22.set(2, addersz(Long.parseLong(rt22.get(2), 2) + Long.parseLong(c, 2)));
+            rt22.set(3, addersz(Long.parseLong(rt22.get(3), 2) + Long.parseLong(d, 2)));
+            rt22.set(4, addersz(Long.parseLong(rt22.get(4), 2) + Long.parseLong(e, 2)));
+            rt22.set(5, addersz(Long.parseLong(rt22.get(5), 2) + Long.parseLong(f, 2)));
+            rt22.set(6, addersz(Long.parseLong(rt22.get(6), 2) + Long.parseLong(g, 2)));
+            rt22.set(7, addersz(Long.parseLong(rt22.get(7), 2) + Long.parseLong(h, 2)));
 
-            // System.out.println(rt22.toString());
+            //System.out.println(rt22.toString());
         }
 
 
@@ -248,8 +225,10 @@ public class Sha256 {
         // hexStr = Long.toString(decimal,16);
         String hexString = new BigInteger(digest, 2).toString(16);
 
-        System.out.println(hexStr);
+        //System.out.println(hexStr);
         //System.out.println(digest);
+//        System.out.println(hexString);
+//        System.out.println(hexString);
         System.out.println(hexString);
 
     }
@@ -257,7 +236,7 @@ public class Sha256 {
     public static int chunkNo(String msg) {
         int chunks = 1;
         int bsize = 447;
-
+        //System.out.println("in chunk: " + msg.length());
         if (msg.length() <= bsize) {
             chunks = 1;
         } else if (msg.length() >= bsize + 1) {

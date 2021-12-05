@@ -68,8 +68,8 @@ public class Sha256 {
     // 3: [01000010100010100010111110011000,   01110001001101110100010010010001,   10110101110000001111101111001111,   11101001101101011101101110100101,   00111001010101101100001001011011,   01011001111100010001000111110001, 10010010001111111000001010100100, 10101011000111000101111011010101, 11011000000001111010101010011000, 00010010100000110101101100000001, 00100100001100011000010110111110, 01010101000011000111110111000011, 01110010101111100101110101110100, 10000000110111101011000111111110, 10011011110111000000011010100111, 11000001100110111111000101110100, 11100100100110110110100111000001, 11101111101111100100011110000110, 00001111110000011001110111000110, 00100100000011001010000111001100, 00101101111010010010110001101111, 01001010011101001000010010101010, 01011100101100001010100111011100, 01110110111110011000100011011010, 10011000001111100101000101010010, 10101000001100011100011001101101, 10110000000000110010011111001000, 10111111010110010111111111000111, 11000110111000000000101111110011, 11010101101001111001000101000111, 00000110110010100110001101010001, 00010100001010010010100101100111, 00100111101101110000101010000101, 00101110000110110010000100111000, 01001101001011000110110111111100, 01010011001110000000110100010011, 01100101000010100111001101010100, 01110110011010100000101010111011, 10000001110000101100100100101110, 10010010011100100010110010000101, 10100010101111111110100010100001, 10101000000110100110011001001011, 11000010010010111000101101110000, 11000111011011000101000110100011, 11010001100100101110100000011001, 11010110100110010000011000100100, 11110100000011100011010110000101, 00010000011010101010000001110000, 00011001101001001100000100010110, 00011110001101110110110000001000, 00100111010010000111011101001100, 00110100101100001011110010110101, 00111001000111000000110010110011, 01001110110110001010101001001010, 01011011100111001100101001001111, 01101000001011100110111111110011, 01110100100011111000001011101110, 01111000101001010110001101101111, 10000100110010000111100000010100, 10001100110001110000001000001000, 10010000101111101111111111111010, 10100100010100000110110011101011, 10111110111110011010001111110111, 11000110011100010111100011110010]
 
     public static void main(String[] args) {
-        //hashes("");
-        //hashes("123");
+        hashes("");
+        hashes("123");
         hashes("abc");
 
 //        String qq = "";
@@ -92,6 +92,14 @@ public class Sha256 {
 //            }
 //        }
 //        System.out.println(qq);
+//        String msg = "000111111100011111110001111111";
+//        System.out.println(msg.length());
+//        for (int i = msg.length(); i < 32; i++) {
+//            msg = "0" + msg;
+//        }
+//        System.out.println(msg);
+//        System.out.println(msg.length());
+
 
     }
 
@@ -152,14 +160,18 @@ public class Sha256 {
                 //int mlen = msgChunks.size();
                 String s0 = sig0(msgChunks.get(msgChunks.size() - 15));
                 //System.out.println("s0: " + s0);
+                //System.out.println("s1 msgChunks: " + msgChunks.get(msgChunks.size() - 2));
                 String s1 = sig1(msgChunks.get(msgChunks.size() - 2));
                 //System.out.println("s1: " + s1);
                 String addup = adder(msgChunks.get(msgChunks.size() - 16), s0, msgChunks.get(msgChunks.size() - 7), s1);
                 //System.out.println("addup: " + addup);
+
                 msgChunks.add(addup);
+                //System.out.println("msgChunks: " + msgChunks.toString());
+                //System.out.println();
             }
-            System.out.println(msgChunks);
-            System.out.println(msgChunks.size());
+            //System.out.println(msgChunks);
+            //System.out.println(msgChunks.size());
 
             String a = rt22.get(0);
             String b = rt22.get(1);
@@ -170,27 +182,48 @@ public class Sha256 {
             String g = rt22.get(6);
             String h = rt22.get(7);
 
+            //System.out.println(a + b + c + d + e + f + g + h);
+//            System.out.println(b);
+//            System.out.println(c);
+//            System.out.println(d);
+//            System.out.println(e);
+//            System.out.println(f);
+//            System.out.println(g);
+//            System.out.println(h);
+
             for (int j = 0; j < 64; j++) {
                 String S1 = sigma1(e);
+                //System.out.println("S: " + S1);
                 String ch = cho(e, f, g);
-                String temp1 = adders(Long.parseLong(h, 2) + Long.parseLong(S1, 2) +
+                //System.out.println("cho: " + ch);
+                String temp1 = addersz(Long.parseLong(h, 2) + Long.parseLong(S1, 2) +
                         Long.parseLong(ch, 2) + Long.parseLong(rt33.get(j), 2) +
                         Long.parseLong(msgChunks.get(j), 2));
-
+                //System.out.println(temp1);
                 String S0 = sigma0(a);
+                //System.out.println(a);
+                //System.out.println("S0: " + S0);
                 String maj = mj(a, b, c);
-                String temp2 = adders(Long.parseLong(S0, 2) + Long.parseLong(maj, 2));
+                //System.out.println(maj);
+
+                String temp2 = addersz(Long.parseLong(S0, 2) + Long.parseLong(maj, 2));
+                //System.out.println(temp2);
 
                 h = g;
                 g = f;
                 f = e;
-                e = adders(Long.parseLong(d, 2) + Long.parseLong(temp1, 2));
+                e = addersz(Long.parseLong(d, 2) + Long.parseLong(temp1, 2));
+                //System.out.println(e);
                 d = c;
                 c = b;
                 b = a;
-                a = adders(Long.parseLong(temp1, 2) + Long.parseLong(temp2, 2));
-
+                a = addersz(Long.parseLong(temp1, 2) + Long.parseLong(temp2, 2));
+//                System.out.println("temp1: " + temp1);
+//                System.out.println("temp2: " + temp2);
+//                System.out.println("a: " + a);
             }
+            //System.out.println(a + b + c + d + e + f + g + h);
+
             rt22.set(0, adders(Long.parseLong(rt22.get(0), 2) + Long.parseLong(a, 2)));
             rt22.set(1, adders(Long.parseLong(rt22.get(1), 2) + Long.parseLong(b, 2)));
             rt22.set(2, adders(Long.parseLong(rt22.get(2), 2) + Long.parseLong(c, 2)));
@@ -216,7 +249,7 @@ public class Sha256 {
         String hexString = new BigInteger(digest, 2).toString(16);
 
         System.out.println(hexStr);
-        System.out.println(digest);
+        //System.out.println(digest);
         System.out.println(hexString);
 
     }
@@ -252,6 +285,8 @@ public class Sha256 {
     }
 
     public static String sig1(String bits) {
+        //System.out.println("bits: " + bits);
+        //System.out.println("bits: " + bits.length());
         String a = rotr(bits, 17);
         String b = rotr(bits, 19);
         String c = shr(bits, 10);
@@ -264,10 +299,17 @@ public class Sha256 {
     }
 
     public static String sigma0(String bits) {
+        String res = "";
+        //System.out.println("bits " + bits);
         String a = rotr(bits, 2);
         String b = rotr(bits, 13);
         String c = rotr(bits, 22);
-        String res = xor(a, b, c);
+        res = xor(a, b, c);
+
+//        System.out.println("a: " + a);
+//        System.out.println("b: " + b);
+//        System.out.println("c: " + c);
+//        System.out.println("s0: " + res);
         return res;
     }
 
@@ -281,30 +323,7 @@ public class Sha256 {
 
     public static String xor(String a, String b, String c) {
         String res = "";
-        //System.out.println("a length: " + a.length());
-//        System.out.println("xor0a: " + a);
-//        System.out.println("xor0b: " + b);
-//        System.out.println("xor0c: " + c);
         for (int i = 0; i < a.length(); i++) {
-            //System.out.println("xor i =" + i);
-//            if(a.substring(i).equals("1") && b.substring(i).equals("1")){
-//                res += "1";
-//            }else if(b.substring(i).equals("1") && c.substring(i).equals("1")){
-//                res += "1";
-//            }else if(a.substring(i).equals("1") && c.substring(i).equals("1")){
-//                res += "1";
-//            }else if(a.substring(i).equals("0") && b.substring(i).equals("0") && c.substring(i).equals("0")){
-//                res += "1";
-//            }else{
-//                res += "0";
-//            }
-            //
-            //
-//            if(a.substring(i).equals("1") ^ b.substring(i).equals("1") ^ c.substring(i).equals("1")){
-//                res += "1";
-//            }else if (a.substring(i).equals("0") ^ b.substring(i).equals("0") ^ c.substring(i).equals("0")){
-//                res += "0";
-//            }
             if ((a.charAt(i) ^ b.charAt(i) ^ c.charAt(i)) == 49) {
                 res += "1";
                 //System.out.println("sig1_xor = 1");
@@ -312,26 +331,9 @@ public class Sha256 {
                 res += "0";
                 //System.out.println("sig1_xor = 0");
             } else {
-                System.out.println("nothinggg");
+                System.out.println("____");
             }
         }
-        //////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        //////////////////////////////////////////////////// fix xor
-
         return res;
     }
 
@@ -347,22 +349,33 @@ public class Sha256 {
 //        System.out.println("c: " + cint);
 //        System.out.println("d: " + dint);
 //        System.out.println("r: " + r);
-
-
         String binr = Long.toBinaryString((long) r);
 //        System.out.println("hhhh: " + binr);
+        //System.out.println("binr size: " + binr.length());
         if (binr.length() == 32) {
             res = binr;
             //System.out.println("qqqqqq");
         } else if (binr.length() > 32) {
             res = Long.toBinaryString((long) (r % Math.pow(2, 32)));
-        } else if (binr.length() < 32) {
+            if (res.length() < 32) {
+                //System.out.println("eSmallLenB: " + res.length());
+                res = addZeros(binr, 32);
+                //System.out.println("eSmallLenR: " + res.length());
+                //System.out.println();
+            }else if (res.length() > 32){
+                //System.out.println("toobig");
+            }
+        }else if (binr.length() < 32) {
             res = addZeros(binr, 32);
-//            System.out.println("eeeeeeee");
-//            System.out.println("ee binr: " + binr);
-//            System.out.println("ee res: " + res);
         }
-        //System.out.println("adderss: "+ res);
+
+        if (res.length() > 32){
+            res = rmZeros(res, 32);
+        }
+//        if( res.length() != 32){
+//            System.out.println("incorrect adders kength");
+//        }
+        //System.out.println("adderrr L: "+ res.length());
         return res;
     }
 
@@ -374,17 +387,51 @@ public class Sha256 {
         String binr = Long.toBinaryString((long) r);
         if (binr.length() == 32) {
             res = binr;
-        } else if (binr.length() >= 32) {
+        } else if (binr.length() > 32) {
             res = Long.toBinaryString((long) (r % Math.pow(2, 32)));
         }
 
         if (res.length() < 32) {
             res = addZeros(res, 32);
         }
+
+        return res;
+    }
+
+    public static String addersz(long a) {
+        String res = "";
+        //System.out.println("adz og: " + a);
+        //String binr = String.format("%032d", Long.parseLong(Long.toBinaryString((long) r)));
+        String binr = Long.toBinaryString((long) a);
+//        System.out.println("binr: " + binr);
+//        System.out.println("binr: " + binr.length());
+        if (binr.length() == 32) {
+            res = binr;
+            //System.out.println("aa");
+        } else if (binr.length() > 32) {
+            res = Long.toBinaryString((long) (a % Math.pow(2, 32)));
+            //System.out.println("bb");
+        }else if(binr.length() < 32){
+            res = addZeros(binr, 32);
+        }
+
+        if (res.length() < 32) {
+//            System.out.println("c1: " + res);
+            res = addZeros(res, 32);
+            //System.out.println("cc");
+//            System.out.println("c2: " + res);
+        }
+
+        if(res.length() != 32){
+            System.out.println("tooo smlll still");
+        }
+        //System.out.println("adderz: " + res);
         return res;
     }
 
     public static String rotr(String a, int rotnumber) {
+        //System.out.println("rotr: " + a);
+        //System.out.println("rotS: " +a.length());
         for (int i = 0; i < rotnumber; i++) {
             String last_char = a.substring(a.length() - 1);
             a = a.substring(0, a.length() - 1);
@@ -405,12 +452,24 @@ public class Sha256 {
     public static String cho(String a, String b, String c) {
 //    #use 'a' input to determine whether to take 'b' or 'c'
         String res = "";
+        //System.out.println(a.length());
         for (int i = 0; i < a.length(); i++) {
-            if (a.substring(i).equals("1")) {
-                res += b.substring(i);
-            } else if (a.substring(i).equals("0")) {
-                res += c.substring(i);
+//            if (a.substring(i).equals("1")) {
+//                res += b.substring(i);
+//            } else if (a.substring(i).equals("0")) {
+//                res += c.substring(i);
+//            } else{
+//                //System.out.println("nothing");
+//            }
+            if (a.charAt(i) == '1') {
+                res += b.charAt(i);
+            } else if (a.charAt(i) == '0') {
+                res += c.charAt(i);
+            } else{
+                System.out.println("nothing");
             }
+            //System.out.println("cho: " + i);
+            //System.out.println("cho: " + res);
         }
         return res;
     }
@@ -419,12 +478,23 @@ public class Sha256 {
 //    #take majority input value
         String res = "";
         for (int i = 0; i < a.length(); i++) {
-            if ((a.substring(i).equals("1") && b.substring(i).equals("1")) ^
-                    (a.substring(i).equals("1") && c.substring(i).equals("1")) ^
-                    (b.substring(i).equals("1") && c.substring(i).equals("1"))) {
+//            if ((a.substring(i).equals("1") && b.substring(i).equals("1")) ^
+//                    (a.substring(i).equals("1") && c.substring(i).equals("1")) ^
+//                    (b.substring(i).equals("1") && c.substring(i).equals("1"))) {
+//                res += "1";
+//            } else {
+//                res += "0";
+//            }
+            if ((a.charAt(i) == '1' && b.charAt(i) == '1') ^
+                    (a.charAt(i) == '1' && c.charAt(i) == '1') ^
+                    (b.charAt(i) == '1' && c.charAt(i) == '1')) {
                 res += "1";
-            } else {
+            } else if ((a.charAt(i) == '0' && b.charAt(i) == '0') ^
+                    (a.charAt(i) == '0' && c.charAt(i) == '0') ^
+                    (b.charAt(i) == '0' && c.charAt(i) == '0')){
                 res += "0";
+            }else{
+                System.out.println("maj nothing");
             }
 
         }
@@ -435,6 +505,20 @@ public class Sha256 {
         for (int i = msg.length(); i < newLen; i++) {
             msg = "0" + msg;
         }
+        if(msg.length() !=32){
+            //System.out.println("add zeroes: " + msg.length());
+        }
+
+        return msg;
+    }
+
+    public static String rmZeros(String msg, int newLen) {
+        int target = msg.length() - newLen;
+        msg =  msg.substring(target,msg.length());
+        if(msg.length() !=32){
+            System.out.println("remove zeroes: " + msg.length());
+        }
+
         return msg;
     }
 

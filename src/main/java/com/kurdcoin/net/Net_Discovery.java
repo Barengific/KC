@@ -1,9 +1,10 @@
 //
-package com.kurdcoin.core;
+//
+package com.kurdcoin.net;
 
-
-public class Net_Discovery{
-
-
+/**
+ * Static class that discovers nodes.
+ */
+public class Net_Discovery {
 
 }

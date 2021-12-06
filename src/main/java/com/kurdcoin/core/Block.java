@@ -5,8 +5,11 @@ package com.kurdcoin.core;
 //
 
 
-
+/**
+ * Object class structure of blocks .
+ */
 public class Block {
+    // private static final long serialVersionUID = 1111L;
 
     // Fields defined as part of the protocol format.
     private long version;
@@ -19,7 +22,7 @@ public class Block {
 
 //    // If null, it means this object holds only the headers.
 //    @VisibleForTesting
-//    @Nullable List<Transaction> transactions;
+//    @Nullable List<Transaction.java> transactions;
 //
 //    /** Stores the hash of the block. If null, getHash() will recalculate it. */
 //    private Sha256Hash hash;
@@ -82,7 +85,7 @@ public class Block {
 //            s.append("   merkle root: ").append(getMerkleRoot()).append("\n");
 //            s.append("   witness root: ").append(getWitnessRoot()).append("\n");
 //            s.append("   with ").append(transactions.size()).append(" transaction(s):\n");
-//            for (Transaction tx : transactions) {
+//            for (Transaction.java tx : transactions) {
 //                s.append(tx).append('\n');
 //            }
 //        }
@@ -132,7 +135,7 @@ public class Block {
 //        // t1 t2 t3 t4 t5 t5
 //        ArrayList<byte[]> tree = new ArrayList<>(transactions.size());
 //        // Start by adding all the hashes of the transactions as leaves of the tree.
-//        for (Transaction tx : transactions) {
+//        for (Transaction.java tx : transactions) {
 //            final Sha256Hash id;
 //            if (useWTxId && tx.isCoinBase())
 //                id = Sha256Hash.ZERO_HASH;
@@ -195,12 +198,12 @@ public class Block {
 //    }
 //
 //    /** Adds a transaction to this block. The nonce and merkle root are invalid after this. */
-//    public void addTransaction(Transaction t) {
+//    public void addTransaction(Transaction.java t) {
 //        addTransaction(t, true);
 //    }
 //
 //    /** Adds a transaction to this block, with or without checking the sanity of doing so */
-//    void addTransaction(Transaction t, boolean runSanityChecks) {
+//    void addTransaction(Transaction.java t, boolean runSanityChecks) {
 //        unCacheTransactions();
 //        if (transactions == null) {
 //            transactions = new ArrayList<>();
@@ -219,7 +222,7 @@ public class Block {
 //
 //    /** Returns an immutable list of transactions held in this block, or null if this object represents just a header. */
 //    @Nullable
-//    public List<Transaction> getTransactions() {
+//    public List<Transaction.java> getTransactions() {
 //        return transactions == null ? null : ImmutableList.copyOf(transactions);
 //    }
 //
@@ -237,7 +240,7 @@ public class Block {
 //    void addCoinbaseTransaction(byte[] pubKeyTo, Coin value, final int height) {
 //        unCacheTransactions();
 //        transactions = new ArrayList<>();
-//        Transaction coinbase = new Transaction(params);
+//        Transaction.java coinbase = new Transaction.java(params);
 //        final ScriptBuilder inputBuilder = new ScriptBuilder();
 //
 //        if (height >= Block.BLOCK_HEIGHT_GENESIS) {
@@ -290,7 +293,7 @@ public class Block {
 //
 //        if (to != null) {
 //            // Add a transaction paying 50 coins to the "to" address.
-//            Transaction t = new Transaction(params);
+//            Transaction.java t = new Transaction.java(params);
 //            t.addOutput(new TransactionOutput(params, t, FIFTY_COINS, to));
 //            // The input does not really need to be a valid signature, as long as it has the right general form.
 //            TransactionInput input;

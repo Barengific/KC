@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.kurdcoin.KCController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kurdcoin.KCController">
+   <children>
+      <Button fx:id="btnNewWallet" layoutX="56.0" layoutY="119.0" mnemonicParsing="false" onAction="#onNewWallet" text="New Wallet">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnImportWallet" layoutX="355.0" layoutY="119.0" mnemonicParsing="false" onAction="#onImportWallet" text="Import Wallet">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tfPrivKeyN" layoutX="57.0" layoutY="175.0" prefHeight="25.0" prefWidth="252.0" promptText="Private Key" />
+      <TextField fx:id="tfSeedPhraseN" layoutX="57.0" layoutY="212.0" prefHeight="25.0" prefWidth="252.0" promptText="Seed Phrase" />
+      <TextField fx:id="tfPubKeyN" layoutX="57.0" layoutY="250.0" prefHeight="25.0" prefWidth="252.0" promptText="Public Key" />
+      <TextField fx:id="tfWalletAddrN" layoutX="57.0" layoutY="283.0" prefHeight="25.0" prefWidth="252.0" promptText="Wallet Address" />
+      <TextField fx:id="tfPrivKeyIm" layoutX="355.0" layoutY="175.0" prefHeight="25.0" prefWidth="252.0" promptText="Private Key" />
+      <TextField fx:id="tfSeedPhraseIm" layoutX="355.0" layoutY="212.0" prefHeight="25.0" prefWidth="252.0" promptText="Or Seed Phrase" />
+      <MenuBar layoutX="6.0" layoutY="14.0" prefHeight="46.0" prefWidth="764.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button layoutX="183.0" layoutY="340.0" mnemonicParsing="false" text="Proceed to Client">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

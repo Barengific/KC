@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kurdcoin.KCCController">
+   <children>
+      <BorderPane prefHeight="500.0" prefWidth="800.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <bottom>
+            <ProgressBar prefHeight="25.0" prefWidth="506.0" progress="0.0" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+      <TabPane layoutY="30.0" prefHeight="471.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="Main" text="Main">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="32.0" layoutY="28.0" text="Available Balance">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="239.0" layoutY="29.0" />
+                        <Label layoutX="37.0" layoutY="64.0" text="Unconfirmed Balance">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="239.0" layoutY="65.0" />
+                        <Label layoutX="43.0" layoutY="109.0" text="Immature Balance">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="201.0" layoutY="110.0" />
+                        <Circle fill="DODGERBLUE" layoutX="641.0" layoutY="123.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ProgressIndicator layoutX="627.0" layoutY="103.0" progress="0.0" />
+                        <Text layoutX="600.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Status" wrappingWidth="94.94140625" />
+                        <Text layoutX="32.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Status:" wrappingWidth="94.94140625" />
+                        <TextField fx:id="tfChange" layoutX="128.0" layoutY="221.0" promptText="Changeme" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="block" text="Block Explorer">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="32.0" layoutY="154.0" prefHeight="200.0" prefWidth="703.0">
+                          <columns>
+                            <TableColumn prefWidth="91.0" text="Block Height" />
+                            <TableColumn prefWidth="102.0" text="Timestamp" />
+                              <TableColumn prefWidth="75.0" text="Hash" />
+                              <TableColumn prefWidth="75.0" text="Nonce" />
+                              <TableColumn prefWidth="75.0" text="Difficulty" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tx" text="Send">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="99.0" layoutY="33.0" />
+                        <TextField layoutX="105.0" layoutY="68.0" />
+                        <TextField layoutX="99.0" layoutY="105.0" />
+                        <Text layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reciept" />
+                        <Text layoutX="22.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" />
+                        <Text layoutX="25.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amount" />
+                        <ComboBox layoutX="265.0" layoutY="105.0" promptText="Choose Amount">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="KC" />
+                                    <String fx:value="mKC" />
+                                    <String fx:value="uKC" />
+                                </FXCollections>
+                            </items>
+                         </ComboBox>
+                        <Button layoutX="42.0" layoutY="373.0" mnemonicParsing="false" text="Add Payee to Address Book" />
+                        <Button layoutX="239.0" layoutY="373.0" mnemonicParsing="false" text="Clear All" />
+                        <Button layoutX="610.0" layoutY="289.0" mnemonicParsing="false" text="Confirm Send" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="rx" text="Receive">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="43.0" layoutY="79.0" prefHeight="299.0" prefWidth="710.0">
+                          <columns>
+                            <TableColumn prefWidth="615.0" text="Address" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="674.0" layoutY="34.0" mnemonicParsing="false" text="Export" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="txrxH" text="Transaction History">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="34.0" layoutY="106.0" prefHeight="200.0" prefWidth="677.0">
+                          <columns>
+                            <TableColumn prefWidth="61.0" text="Payee" />
+                            <TableColumn prefWidth="74.0" text="Amount" />
+                              <TableColumn prefWidth="88.0" text="Timestamp" />
+                              <TableColumn prefWidth="89.0" text="Hash" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="addressbook" text="Address Book">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="77.0" layoutY="158.0" prefHeight="200.0" prefWidth="638.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Name" />
+                            <TableColumn prefWidth="348.0" text="Address" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="43.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Address book only exists on this machine and is not sync'd with the blockchain. " wrappingWidth="618.13671875" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="nodesTx" text="Connected Nodes">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="19.0" layoutY="45.0" prefHeight="149.0" prefWidth="762.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="IP Address" />
+                            <TableColumn prefWidth="109.0" text="Node Name" />
+                              <TableColumn prefWidth="104.0" text="Port Number" />
+                              <TableColumn prefWidth="75.0" text="Node ID" />
+                          </columns>
+                        </TableView>
+                        <TableView layoutX="14.0" layoutY="221.0" prefHeight="149.0" prefWidth="762.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="IP Address" />
+                              <TableColumn prefWidth="109.0" text="Node Name" />
+                              <TableColumn prefWidth="104.0" text="Port Number" />
+                              <TableColumn prefWidth="75.0" text="Node ID" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="19.0" layoutY="22.0" text="Nodes sending to" />
+                        <Label layoutX="19.0" layoutY="204.0" text="Nodes Receiving from" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Pane fx:id="mPane" blendMode="SRC_ATOP" prefHeight="501.0" prefWidth="800.0" styleClass="pane" stylesheets="@../Styles.css">
+         <children>
+            <Button alignment="CENTER" layoutX="234.0" layoutY="251.0" mnemonicParsing="false" onAction="#cContinues" text="Click To Continue">
+               <font>
+                  <Font name="System Italic" size="37.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

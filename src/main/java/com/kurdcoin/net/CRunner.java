@@ -63,7 +63,8 @@ public class CRunner extends Thread {
             } else if (msg.equals("2")) {
                 Parent p = ((Node) event.getSource()).getScene().getRoot();
                 ObservableList<Node> aa = p.getChildrenUnmodifiable();
-                System.out.println(aa.toString());
+                //System.out.println(aa.toString());
+
             }
         } catch (Exception ex) {
             Logger.getLogger(CRunner.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +78,7 @@ public class CRunner extends Thread {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
 
-            Ip = in.readLine(); //you get the IP as a String
+            Ip = in.readLine(); //IP as a String
             System.out.println(Ip);
         } catch (MalformedURLException e) {
             e.printStackTrace();

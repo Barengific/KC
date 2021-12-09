@@ -90,14 +90,9 @@ public class KCController {
 
     @FXML
     public void switchToClient(ActionEvent event) throws IOException {
-//        System.out.println(rprivK);
-//        System.out.println(rSeed);
-//        System.out.println(rpubK);
-//        System.out.println(rWallet);
 
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("/fxml/kcc.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         CRunner cRun = new CRunner(event);
         cRun.msg = "2";

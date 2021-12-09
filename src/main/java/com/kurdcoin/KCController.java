@@ -16,9 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Class that controls the frontend GUI client.
@@ -44,51 +42,72 @@ public class KCController {
     @FXML
     private TextField tfSeedPhraseIm;
 
+    Stage stage;
+    Parent scene;
+
+    String rprivK;
+    String rSeed;
+    String rpubK;
+    String rWallet;
+
     @FXML
     private void onImportWallet(){
-        System.out.println("improtinng");
+        if(tfPrivKeyIm.getText().length() == 64){
+            //TODO check validity of private key entered
+        }else if(tfSeedPhraseIm.getText() != null){
+            //TODO check validity of seed phrase entered
+        }
+
     }
+
     @FXML
     private void onNewWallet(ActionEvent event) throws IOException {
-
-        System.out.println("generating new wallet");
-
         KeyPair kp = ss.generateKeyPair();
-
         PrivateKey privk = kp.getPrivateKey();
         tfPrivKeyN.setText(privk.toString());
         PublicKey pubk = ss.derivePublicKey(privk);
         tfPubKeyN.setText(pubk.toString());
         tfWalletAddrN.setText(Sha256.hashes(pubk.toString()));
         CRunner cRun = new CRunner(event);
+        cRun.msg = "1";
         cRun.privk = privk.toString();
         cRun.run();
 
-    }
-    public void seedPhrase(ArrayList<String> seed){
-        //Stage.getScene().getRoot().
-        tfSeedPhraseN.setText(seed.get(0));
-        for(int i = 1; i < seed.size(); i++){
-            tfSeedPhraseN.setText(tfSeedPhraseN.getText() + " " + seed.get(i));
-        }
+        rprivK = privk.toString();
+        rSeed = tfSeedPhraseN.getText();
+        rpubK = pubk.toString();
+        rWallet = Sha256.hashes(pubk.toString());
+
 
     }
+//    public void seedPhrase(ArrayList<String> seed){
+//        //Stage.getScene().getRoot().
+//        tfSeedPhraseN.setText(seed.get(0));
+//        for(int i = 1; i < seed.size(); i++){
+//            tfSeedPhraseN.setText(tfSeedPhraseN.getText() + " " + seed.get(i));
+//        }
+//    }
 
-    Stage stage;
-    Parent scene;
-    public void switchViews(ActionEvent event) throws IOException {
+    @FXML
+    public void switchToClient(ActionEvent event) throws IOException {
+//        System.out.println(rprivK);
+//        System.out.println(rSeed);
+//        System.out.println(rpubK);
+//        System.out.println(rWallet);
 
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/fxml/kc111.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/fxml/kcc.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-
         //This line gets the Stage information
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
+        CRunner cRun = new CRunner(event);
+        cRun.msg = "2";
+        cRun.privk = rprivK;
+        cRun.pubK = rpubK;
+        cRun.seed = rSeed;
+        cRun.wallet = rWallet;
+        cRun.run();
         window.setScene(tableViewScene);
         window.show();
     }
-
-
-
 
 }

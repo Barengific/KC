@@ -6,49 +6,56 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kurdcoin.KCController">
+<AnchorPane prefHeight="368.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kurdcoin.KCController">
    <children>
-      <Button fx:id="btnNewWallet" layoutX="56.0" layoutY="119.0" mnemonicParsing="false" onAction="#onNewWallet" text="New Wallet">
+      <BorderPane prefHeight="365.0" prefWidth="800.0">
+         <top>
+            <MenuBar prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <bottom>
+            <Button mnemonicParsing="false" onAction="#switchToClient" text="Proceed to Client" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Button>
+         </bottom>
+      </BorderPane>
+      <Button fx:id="btnNewWallet" layoutX="10.0" layoutY="54.0" mnemonicParsing="false" onAction="#onNewWallet" text="New Wallet">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnImportWallet" layoutX="355.0" layoutY="119.0" mnemonicParsing="false" onAction="#onImportWallet" text="Import Wallet">
+      <Button fx:id="btnImportWallet" layoutX="508.0" layoutY="54.0" mnemonicParsing="false" onAction="#onImportWallet" text="Import Wallet">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <TextField fx:id="tfPrivKeyN" layoutX="57.0" layoutY="175.0" prefHeight="25.0" prefWidth="252.0" promptText="Private Key" />
-      <TextField fx:id="tfSeedPhraseN" layoutX="57.0" layoutY="212.0" prefHeight="25.0" prefWidth="252.0" promptText="Seed Phrase" />
-      <TextField fx:id="tfPubKeyN" layoutX="57.0" layoutY="250.0" prefHeight="25.0" prefWidth="252.0" promptText="Public Key" />
-      <TextField fx:id="tfWalletAddrN" layoutX="57.0" layoutY="283.0" prefHeight="25.0" prefWidth="252.0" promptText="Wallet Address" />
-      <TextField fx:id="tfPrivKeyIm" layoutX="355.0" layoutY="175.0" prefHeight="25.0" prefWidth="252.0" promptText="Private Key" />
-      <TextField fx:id="tfSeedPhraseIm" layoutX="355.0" layoutY="212.0" prefHeight="25.0" prefWidth="252.0" promptText="Or Seed Phrase" />
-      <MenuBar layoutX="6.0" layoutY="14.0" prefHeight="46.0" prefWidth="764.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Button layoutX="183.0" layoutY="340.0" mnemonicParsing="false" text="Proceed to Client">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Button>
+      <TextField fx:id="tfPrivKeyN" layoutX="11.0" layoutY="110.0" prefHeight="25.0" prefWidth="481.0" promptText="Private Key" />
+      <TextField fx:id="tfSeedPhraseN" layoutX="11.0" layoutY="150.0" prefHeight="25.0" prefWidth="481.0" promptText="Seed Phrase" />
+      <TextField fx:id="tfPubKeyN" layoutX="11.0" layoutY="190.0" prefHeight="25.0" prefWidth="481.0" promptText="Public Key" />
+      <TextField fx:id="tfWalletAddrN" layoutX="11.0" layoutY="230.0" prefHeight="25.0" prefWidth="481.0" promptText="Wallet Address" />
+      <TextField fx:id="tfPrivKeyIm" layoutX="508.0" layoutY="110.0" prefHeight="25.0" prefWidth="285.0" promptText="Private Key" />
+      <TextField fx:id="tfSeedPhraseIm" layoutX="508.0" layoutY="150.0" prefHeight="25.0" prefWidth="285.0" promptText="Or Seed Phrase" />
    </children>
 </AnchorPane>

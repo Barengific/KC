@@ -4,6 +4,9 @@
 package com.kurdcoin;
 
 import com.kurdcoin.net.CRunner;
+import com.kurdcoin.net.KRunner;
+import com.kurdcoin.net.NodeRegistrar;
+import com.kurdcoin.net.SRunner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,11 +21,12 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 /**
  * Kurdcoin
  */
 public class KC extends Application {
+    NodeRegistrar nr = new NodeRegistrar();
+    CRunner cRun = new CRunner();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -48,6 +52,18 @@ public class KC extends Application {
         //
         //
         launch(args);
+
+    }
+    public void initKc(){
+        nr.setNodeIp(cRun.readExIp());
+        nr.setPortNo(1234);
+        nr.setNodeName("Bob");
+        nr.setNodeId(nr.getNodeIp(), nr.getPortNo(), nr.getNodeName());
+
+        KRunner kRun = new KRunner();
+        kRun.start();
+        SRunner sRun = new SRunner();
+        sRun.start();
 
     }
 

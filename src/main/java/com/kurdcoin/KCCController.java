@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class KCCController {
+    KC kc = new KC();
     @FXML
     private Pane mPane;
 
@@ -22,10 +23,7 @@ public class KCCController {
     @FXML
     public void cContinues(ActionEvent event) throws IOException {
         mPane.setVisible(false);
-        System.out.println("yup" + CRunner.privk);
-        System.out.println(CRunner.pubK);
-        System.out.println(CRunner.seed);
-        System.out.println(CRunner.wallet);
+        kc.initKc();
 
     }
 }

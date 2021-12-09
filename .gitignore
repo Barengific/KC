@@ -102,3 +102,14 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+target/classes/fxml/kcc.fxml
+target/classes/fxml/kc.fxml
+target/classes/META-INF/Kurdcoin.kotlin_module
+target/classes/Styles.css
+target/classes/words_list.txt
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+bin/main/fxml/kc.fxml

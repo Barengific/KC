@@ -28,19 +28,26 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu fx:id="File" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" text="Import Wallet" />
+                        <MenuItem mnemonicParsing="false" text="Backup Wallet" />
+                        <MenuItem mnemonicParsing="false" text="Sign Message" />
+                        <MenuItem mnemonicParsing="false" text="Verify Message" />
+                        <MenuItem mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu fx:id="Settings" mnemonicParsing="false" text="Settings">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" text="Encrypt Wallet" />
+                        <MenuItem mnemonicParsing="false" text="Options" />
+                        <MenuItem mnemonicParsing="false" text="Change Passphrase" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="Help" mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" text="Debug Window" />
+                        <MenuItem mnemonicParsing="false" text="About Kurdcoin" />
                   </items>
                 </Menu>
               </menus>
@@ -73,12 +80,16 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="201.0" layoutY="110.0" />
-                        <Circle fill="DODGERBLUE" layoutX="641.0" layoutY="123.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-                        <ProgressIndicator layoutX="627.0" layoutY="103.0" progress="0.0" />
-                        <Text layoutX="600.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Status" wrappingWidth="94.94140625" />
+                        <TextField layoutX="239.0" layoutY="110.0" />
+                        <Circle fill="DODGERBLUE" layoutX="614.0" layoutY="123.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ProgressIndicator layoutX="600.0" layoutY="103.0" progress="0.0" />
+                        <Text layoutX="573.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Status" wrappingWidth="94.94140625" />
                         <Text layoutX="32.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Network Status:" wrappingWidth="94.94140625" />
                         <TextField fx:id="tfChange" layoutX="128.0" layoutY="221.0" promptText="Changeme" />
+                        <Circle fill="DODGERBLUE" layoutX="512.0" layoutY="123.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ProgressIndicator layoutX="498.0" layoutY="103.0" progress="0.0" />
+                        <Text layoutX="464.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wallet Status" wrappingWidth="94.94140625" />
+                        <Text layoutX="492.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connected to .x. peers" wrappingWidth="141.94140625" />
                      </children>
                   </AnchorPane>
             </content>
@@ -87,7 +98,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="32.0" layoutY="154.0" prefHeight="200.0" prefWidth="703.0">
+                        <TableView layoutX="5.0" layoutY="49.0" prefHeight="347.0" prefWidth="791.0">
                           <columns>
                             <TableColumn prefWidth="91.0" text="Block Height" />
                             <TableColumn prefWidth="102.0" text="Timestamp" />
@@ -96,6 +107,7 @@
                               <TableColumn prefWidth="75.0" text="Difficulty" />
                           </columns>
                         </TableView>
+                        <Label layoutX="20.0" layoutY="14.0" text="Here you can explorer the blocks have have been mined previously" />
                      </children>
                   </AnchorPane>
             </content>
@@ -122,6 +134,7 @@
                         <Button layoutX="42.0" layoutY="373.0" mnemonicParsing="false" text="Add Payee to Address Book" />
                         <Button layoutX="239.0" layoutY="373.0" mnemonicParsing="false" text="Clear All" />
                         <Button layoutX="610.0" layoutY="289.0" mnemonicParsing="false" text="Confirm Send" />
+                        <Label layoutX="279.0" layoutY="37.0" text="//TODO open address book" />
                      </children>
                   </AnchorPane>
               </content>
@@ -130,12 +143,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="43.0" layoutY="79.0" prefHeight="299.0" prefWidth="710.0">
+                        <TableView layoutX="4.0" layoutY="50.0" prefHeight="299.0" prefWidth="788.0">
                           <columns>
-                            <TableColumn prefWidth="615.0" text="Address" />
+                              <TableColumn minWidth="0.0" prefWidth="134.0" text="Label" />
+                            <TableColumn prefWidth="568.0" text="Address" />
                           </columns>
                         </TableView>
-                        <Button layoutX="674.0" layoutY="34.0" mnemonicParsing="false" text="Export" />
+                        <Button layoutX="695.0" layoutY="361.0" mnemonicParsing="false" text="Export" />
+                        <Label layoutX="55.0" layoutY="26.0" text="There are your kurdcoin addresses:" />
+                        <Button layoutX="55.0" layoutY="361.0" mnemonicParsing="false" text="New Address" />
+                        <Button layoutX="188.0" layoutY="361.0" mnemonicParsing="false" text="Copy Address" />
+                        <Button layoutX="303.0" layoutY="361.0" mnemonicParsing="false" text="Sign Message" />
+                        <Button layoutX="436.0" layoutY="361.0" mnemonicParsing="false" text="Verify Message" />
                      </children>
                   </AnchorPane>
               </content>
@@ -144,14 +163,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="34.0" layoutY="106.0" prefHeight="200.0" prefWidth="677.0">
+                        <TableView layoutX="8.0" layoutY="48.0" prefHeight="361.0" prefWidth="788.0">
                           <columns>
-                            <TableColumn prefWidth="61.0" text="Payee" />
-                            <TableColumn prefWidth="74.0" text="Amount" />
-                              <TableColumn prefWidth="88.0" text="Timestamp" />
-                              <TableColumn prefWidth="89.0" text="Hash" />
+                              <TableColumn prefWidth="75.0" text="Status" />
+                              <TableColumn prefWidth="75.0" text="Type" />
+                            <TableColumn prefWidth="322.0" text="Payee" />
+                            <TableColumn prefWidth="58.0" text="Amount" />
+                              <TableColumn prefWidth="70.0" text="Timestamp" />
+                              <TableColumn prefWidth="261.0" text="Transaction ID" />
                           </columns>
                         </TableView>
+                        <TextField layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="783.0" promptText="Search by Address, Status, Type, Amount, Timestamp, Transaction ID" />
                      </children>
                   </AnchorPane>
               </content>
@@ -160,13 +182,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="77.0" layoutY="158.0" prefHeight="200.0" prefWidth="638.0">
+                        <TableView layoutX="8.0" layoutY="62.0" prefHeight="298.0" prefWidth="783.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Name" />
                             <TableColumn prefWidth="348.0" text="Address" />
                           </columns>
                         </TableView>
                         <Text layoutX="43.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Address book only exists on this machine and is not sync'd with the blockchain. " wrappingWidth="618.13671875" />
+                        <Button layoutX="711.0" layoutY="380.0" mnemonicParsing="false" text="Export" />
+                        <Button layoutX="71.0" layoutY="380.0" mnemonicParsing="false" text="New Address" />
+                        <Button layoutX="204.0" layoutY="380.0" mnemonicParsing="false" text="Copy Address" />
+                        <Button layoutX="319.0" layoutY="380.0" mnemonicParsing="false" text="Delete Address" />
+                        <Button layoutX="452.0" layoutY="380.0" mnemonicParsing="false" text="Verify Message" />
                      </children>
                   </AnchorPane>
               </content>
